@@ -5,3 +5,10 @@
 /.classpath
 /.project
 *.iml
+/src/kangyuanquan/target/
+/src/kangyuanquan/.idea/
+/src/kangyuanquan/.settings/
+/src/kangyuanquan/build/
+/src/kangyuanquan/.classpath
+/src/kangyuanquan/.project
+/src/kangyuanquan/*.iml
