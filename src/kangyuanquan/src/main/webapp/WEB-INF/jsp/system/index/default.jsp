@@ -35,7 +35,7 @@
 									<i class="ace-icon fa fa-times"></i>
 								</button>
 								<i class="ace-icon fa fa-check green"></i>
-								欢迎使用 普宁档案信息网 &nbsp;&nbsp;
+								欢迎使用 康园圈 &nbsp;&nbsp;
 							</div>
 							
 							
@@ -47,7 +47,7 @@
 						        // 指定图表的配置项和数据
 								var option = {
 						            title: {
-						                text: ' 普宁档案信息网 用户统计'
+						                text: ' 康园圈 用户统计'
 						            },
 						            tooltip: {},
 						            xAxis: {
