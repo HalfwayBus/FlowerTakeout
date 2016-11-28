@@ -27,6 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
    <h1>项目部署成功</h1>
+   <a href="app_index/goatdetail.do">测试：去活动详情</a>
 </body>
 </html>
 
