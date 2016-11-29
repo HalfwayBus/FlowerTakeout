@@ -29,37 +29,7 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-							
-						<!-- 检索  -->
 						<form action="stopmanage/list.do" method="post" name="Form" id="Form">
-						<table style="margin-top:5px;">
-							<tr>
-								<td>
-									<div class="nav-search">
-										<span class="input-icon">
-											<input type="text" placeholder="这里输入关键词" class="nav-search-input" id="nav-search-input" autocomplete="off" name="keywords" value="${pd.keywords }" placeholder="这里输入关键词"/>
-											<i class="ace-icon fa fa-search nav-search-icon"></i>
-										</span>
-									</div>
-								</td>
-								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastStart" id="lastStart"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="开始日期" title="开始日期"/></td>
-								<td style="padding-left:2px;"><input class="span10 date-picker" name="lastEnd" name="lastEnd"  value="" type="text" data-date-format="yyyy-mm-dd" readonly="readonly" style="width:88px;" placeholder="结束日期" title="结束日期"/></td>
-								<td style="vertical-align:top;padding-left:2px;">
-								 	<select class="chosen-select form-control" name="name" id="id" data-placeholder="请选择" style="vertical-align:top;width: 120px;">
-									<option value=""></option>
-									<option value="">全部</option>
-									<option value="">1</option>
-									<option value="">2</option>
-								  	</select>
-								</td>
-								<c:if test="${QX.cha == 1 }">
-								<td style="vertical-align:top;padding-left:2px"><a class="btn btn-light btn-xs" onclick="tosearch();"  title="检索"><i id="nav-search-icon" class="ace-icon fa fa-search bigger-110 nav-search-icon blue"></i></a></td>
-								</c:if>
-								<c:if test="${QX.toExcel == 1 }"><td style="vertical-align:top;padding-left:2px;"><a class="btn btn-light btn-xs" onclick="toExcel();" title="导出到EXCEL"><i id="nav-search-icon" class="ace-icon fa fa-download bigger-110 nav-search-icon blue"></i></a></td></c:if>
-							</tr>
-						</table>
-						<!-- 检索  -->
-					
 						<table id="simple-table" class="table table-striped table-bordered table-hover" style="margin-top:5px;">	
 							<thead>
 								<tr>
@@ -94,8 +64,23 @@
 											<td class='center'>${var.INTRODUCTION}</td>
 											<td class='center'>${var.ADDRESS}</td>
 											<td class='center'>${var.PHONE}</td>
-											<td class='center'>${var.LOGO}</td>
-											<td class='center'>${var.STOPIMG}</td>
+											<td class='center'>
+												<c:choose>
+												<c:when test="${var.LOGO!=null}">
+												<div style="margin: 0 auto; width:150px;overflow:hidden"><img style="height: 80px;" src="${pageContext.request.contextPath}${var.LOGO}"/><div>
+													</c:when>
+													<c:otherwise>无</c:otherwise>
+													</c:choose>
+											</td>
+											<td class='center'>
+												<c:choose>
+												<c:when test="${var.STOPIMG!=null}">
+												<div style="margin: 0 auto; width:150px;overflow:hidden"><img style="height: 80px;" src="${pageContext.request.contextPath}${var.STOPIMG}"/><div>
+													</c:when>
+													<c:otherwise>无</c:otherwise>
+													</c:choose>
+											</td>
+
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
@@ -304,8 +289,8 @@
 			 diag.Drag=true;
 			 diag.Title ="编辑";
 			 diag.URL = '<%=basePath%>stopmanage/goEdit.do?STOPMANAGE_ID='+Id;
-			 diag.Width = 450;
-			 diag.Height = 355;
+			 diag.Width = 800;
+			 diag.Height = 700;
 			 diag.CancelEvent = function(){ //关闭事件
 				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 nextPage(${page.currentPage});

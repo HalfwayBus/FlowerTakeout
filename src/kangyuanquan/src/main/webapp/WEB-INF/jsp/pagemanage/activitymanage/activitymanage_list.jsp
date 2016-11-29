@@ -67,7 +67,7 @@
 											<td class='center '>
 												<label class="pos-rel"><input style="margin: 0 auto" type='checkbox' name='ids' value="${var.ACTIVITYMANAGE_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
-											<td class='center' style="width: 30px;">${vs.index+1}</td>
+											<td class='center' style="width: 130px;">${vs.index+1}</td>
 											<td class='center'>${var.TITLE}</td>
 											<td class='center'>${var.DESCRIBES}</td>
 											<td class='center'>
@@ -288,7 +288,7 @@
 			 top.jzts();
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
-			 diag.Title ="编辑";
+			 diag.Title ="编辑活动公告";
 			 diag.URL = '<%=basePath%>activitymanage/goEdit.do?ACTIVITYMANAGE_ID='+Id;
 			 diag.Width = 1000;
 			 diag.Height = 700;

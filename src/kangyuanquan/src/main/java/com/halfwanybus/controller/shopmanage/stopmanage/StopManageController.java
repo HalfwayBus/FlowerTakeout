@@ -9,12 +9,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+
+import com.halfwanybus.service.system.tools.singleImg.SingleImgManager;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.halfwanybus.controller.base.BaseController;
 import com.halfwanybus.entity.Page;
@@ -37,19 +42,51 @@ public class StopManageController extends BaseController {
 	String menuUrl = "stopmanage/list.do"; //菜单地址(权限用)
 	@Resource(name="stopmanageService")
 	private StopManageManager stopmanageService;
-	
+	@Resource(name="singleImgService")
+	private SingleImgManager singleImgService;
 	/**保存
 	 * @param
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/save")
-	public ModelAndView save() throws Exception{
+	public ModelAndView save(
+			@RequestParam(value="image",required=false) CommonsMultipartFile image,
+			@RequestParam(value="image2",required=false) CommonsMultipartFile image2,
+			HttpSession session,
+			@RequestParam(value="STOPMANAGE_ID",required=false) String STOPMANAGE_ID,
+			@RequestParam(value="OWNER",required=false) String OWNER,
+			@RequestParam(value="STOPNAME",required=false) String STOPNAME,
+			@RequestParam(value="INTRODUCTION",required=false) String INTRODUCTION,
+			@RequestParam(value="ADDRESS",required=false) String ADDRESS,
+			@RequestParam(value="PHONE",required=false) String PHONE,
+			@RequestParam(value="LOGO",required=false) String LOGO,
+			@RequestParam(value="STOPIMG",required=false) String STOPIMG
+	) throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"新增StopManage");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "add")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
-		pd = this.getPageData();
-		pd.put("F_ID", this.get32UUID());	//主键
+		pd.put("STOPMANAGE_ID", this.get32UUID());	//主键
+		pd.put("OWNER",OWNER);
+		pd.put("STOPNAME",STOPNAME);
+		pd.put("INTRODUCTION",INTRODUCTION);
+		pd.put("ADDRESS",ADDRESS);
+		pd.put("PHONE",PHONE);
+		String imageUrl = null;
+		String uploadPath ="/static/images";
+		if(image.getSize()>0){
+			String realUploadPath = session.getServletContext().getRealPath(uploadPath);
+			imageUrl = singleImgService.uploadImage(image, uploadPath, realUploadPath,this.get32UUID());
+			session.removeAttribute("image");
+		}
+		pd.put("LOGO",imageUrl);
+		imageUrl = null;
+		if(image2.getSize()>0){
+			String realUploadPath = session.getServletContext().getRealPath(uploadPath);
+			imageUrl = singleImgService.uploadImage(image2, uploadPath, realUploadPath,this.get32UUID());
+			session.removeAttribute("image2");
+		}
+		pd.put("STOPIMG",imageUrl);
 		stopmanageService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -76,12 +113,64 @@ public class StopManageController extends BaseController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/edit")
-	public ModelAndView edit() throws Exception{
+	public ModelAndView edit(
+			@RequestParam(value="image",required=false) CommonsMultipartFile image,
+			@RequestParam(value="image2",required=false) CommonsMultipartFile image2,
+			HttpSession session,
+			@RequestParam(value="imgChange",required=false) String imgChange,
+			@RequestParam(value="imgChange2",required=false) String imgChange2,
+			@RequestParam(value="STOPMANAGE_ID",required=false) String STOPMANAGE_ID,
+			@RequestParam(value="OWNER",required=false) String OWNER,
+			@RequestParam(value="STOPNAME",required=false) String STOPNAME,
+			@RequestParam(value="INTRODUCTION",required=false) String INTRODUCTION,
+			@RequestParam(value="ADDRESS",required=false) String ADDRESS,
+			@RequestParam(value="PHONE",required=false) String PHONE,
+			@RequestParam(value="LOGO",required=false) String LOGO,
+			@RequestParam(value="STOPIMG",required=false) String STOPIMG
+	) throws Exception{
 		logBefore(logger, Jurisdiction.getUsername()+"修改StopManage");
 		if(!Jurisdiction.buttonJurisdiction(menuUrl, "edit")){return null;} //校验权限
 		ModelAndView mv = this.getModelAndView();
 		PageData pd = new PageData();
-		pd = this.getPageData();
+		pd.put("STOPMANAGE_ID",STOPMANAGE_ID);
+		pd = stopmanageService.findById(pd);
+		pd.put("OWNER",OWNER);
+		pd.put("STOPNAME",STOPNAME);
+		pd.put("INTRODUCTION",INTRODUCTION);
+		pd.put("ADDRESS",ADDRESS);
+		pd.put("PHONE",PHONE);
+		//图片更新
+		String imageUrl = null;
+		if(image!=null){
+			if(image.getSize()>0){
+				String uploadPath ="/static/images";
+				String realUploadPath = session.getServletContext().getRealPath(uploadPath);
+				imageUrl = singleImgService.uploadImage(image, uploadPath, realUploadPath,this.get32UUID());
+				pd.put("LOGO", imageUrl);//覆盖
+				session.removeAttribute("image");
+			}else {
+				System.out.println(imgChange);
+				if(imgChange!=null){//前台页面点击了重新选择图片，只是没有选图片
+					pd.put("LOGO", null);//覆盖
+				}
+			}
+		}
+		//图片更新
+		imageUrl = null;
+		if(image2!=null){
+			if(image2.getSize()>0){
+				String uploadPath ="/static/images";
+				String realUploadPath = session.getServletContext().getRealPath(uploadPath);
+				imageUrl = singleImgService.uploadImage(image2, uploadPath, realUploadPath,this.get32UUID());
+				pd.put("STOPIMG", imageUrl);//覆盖
+				session.removeAttribute("image2");
+			}else {
+				System.out.println(imgChange2);
+				if(imgChange!=null){//前台页面点击了重新选择图片，只是没有选图片
+					pd.put("STOPIMG", null);//覆盖
+				}
+			}
+		}
 		stopmanageService.edit(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -169,45 +258,7 @@ public class StopManageController extends BaseController {
 		return AppUtil.returnObject(pd, map);
 	}
 	
-	 /**导出到excel
-	 * @param
-	 * @throws Exception
-	 */
-	@RequestMapping(value="/excel")
-	public ModelAndView exportExcel() throws Exception{
-		logBefore(logger, Jurisdiction.getUsername()+"导出StopManage到excel");
-		if(!Jurisdiction.buttonJurisdiction(menuUrl, "cha")){return null;}
-		ModelAndView mv = new ModelAndView();
-		PageData pd = new PageData();
-		pd = this.getPageData();
-		Map<String,Object> dataMap = new HashMap<String,Object>();
-		List<String> titles = new ArrayList<String>();
-		titles.add("店主");	//1
-		titles.add("店铺名");	//2
-		titles.add("描述");	//3
-		titles.add("地址");	//4
-		titles.add("电话");	//5
-		titles.add("图标");	//6
-		titles.add("店内图");	//7
-		dataMap.put("titles", titles);
-		List<PageData> varOList = stopmanageService.listAll(pd);
-		List<PageData> varList = new ArrayList<PageData>();
-		for(int i=0;i<varOList.size();i++){
-			PageData vpd = new PageData();
-			vpd.put("var1", varOList.get(i).getString("OWNER"));	//1
-			vpd.put("var2", varOList.get(i).getString("STOPNAME"));	//2
-			vpd.put("var3", varOList.get(i).getString("INTRODUCTION"));	//3
-			vpd.put("var4", varOList.get(i).getString("ADDRESS"));	//4
-			vpd.put("var5", varOList.get(i).getString("PHONE"));	//5
-			vpd.put("var6", varOList.get(i).getString("LOGO"));	//6
-			vpd.put("var7", varOList.get(i).getString("STOPIMG"));	//7
-			varList.add(vpd);
-		}
-		dataMap.put("varList", varList);
-		ObjectExcelView erv = new ObjectExcelView();
-		mv = new ModelAndView(erv,dataMap);
-		return mv;
-	}
+
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder){

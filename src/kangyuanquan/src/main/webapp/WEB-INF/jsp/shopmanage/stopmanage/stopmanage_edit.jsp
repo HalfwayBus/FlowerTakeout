@@ -27,7 +27,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 					
-					<form action="stopmanage/${msg }.do" name="Form" id="Form" method="post">
+					<form action="stopmanage/${msg }.do" name="Form" id="Form" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="STOPMANAGE_ID" id="STOPMANAGE_ID" value="${pd.STOPMANAGE_ID}"/>
 						<div id="zhongxin" style="padding-top: 13px;">
 						<table id="table_report" class="table table-striped table-bordered table-hover">
@@ -51,13 +51,43 @@
 								<td style="width:75px;text-align: right;padding-top: 13px;">电话:</td>
 								<td><input type="text" name="PHONE" id="PHONE" value="${pd.PHONE}" maxlength="20" placeholder="这里输入电话" title="电话" style="width:98%;"/></td>
 							</tr>
+
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">图标:</td>
-								<td><input type="text" name="LOGO" id="LOGO" value="${pd.LOGO}" maxlength="255" placeholder="这里输入图标" title="图标" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">图标</td>
+								<td id="imgcontext">
+									<div style="width:98%;padding: 10px;border: 1px solid #ccc;">
+										<c:choose>
+											<c:when test="${pd.LOGO!=null}">
+												<img style="height: 300px;" src="${pageContext.request.contextPath}${pd.LOGO}"/></br></br>
+												<span style="padding-left: 20px">
+											 	  <input class="btn btn-primary"  type="button" name="newImg" id="newImg" value="重新选择"/>
+												</span>
+											</c:when>
+											<c:otherwise>
+												<input type="file" id="image" name="image"/>
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</td>
 							</tr>
+
 							<tr>
-								<td style="width:75px;text-align: right;padding-top: 13px;">店内图:</td>
-								<td><input type="text" name="STOPIMG" id="STOPIMG" value="${pd.STOPIMG}" maxlength="255" placeholder="这里输入店内图" title="店内图" style="width:98%;"/></td>
+								<td style="width:75px;text-align: right;padding-top: 13px;">店内图</td>
+								<td id="imgcontext2">
+									<div style="width:98%;padding: 10px;border: 1px solid #ccc;">
+										<c:choose>
+											<c:when test="${pd.STOPIMG!=null}">
+												<img style="height: 300px;" src="${pageContext.request.contextPath}${pd.STOPIMG}"/></br></br>
+												<span style="padding-left: 20px">
+											 	  <input class="btn btn-primary"  type="button" name="newImg2" id="newImg2" value="重新选择"/>
+												</span>
+											</c:when>
+											<c:otherwise>
+												<input type="file" id="image2" name="image2"/>
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</td>
 							</tr>
 							<tr>
 								<td style="text-align: center;" colspan="10">
@@ -144,20 +174,20 @@
 				$("#PHONE").focus();
 			return false;
 			}
-			if($("#LOGO").val()==""){
-				$("#LOGO").tips({
+			if($("#image").val()==""){
+				$("#image").tips({
 					side:3,
-		            msg:'请输入图标',
+		            msg:'请选择图标',
 		            bg:'#AE81FF',
 		            time:2
 		        });
 				$("#LOGO").focus();
 			return false;
 			}
-			if($("#STOPIMG").val()==""){
-				$("#STOPIMG").tips({
+			if($("#image2").val()==""){
+				$("#image2").tips({
 					side:3,
-		            msg:'请输入店内图',
+		            msg:'请选择店内图',
 		            bg:'#AE81FF',
 		            time:2
 		        });
@@ -168,7 +198,80 @@
 			$("#zhongxin").hide();
 			$("#zhongxin2").show();
 		}
-		
+		function fileChange(){
+			//检测上传文件的类型
+			var videoName = $("#image").val();
+			//获取"."所在的位置
+			var idx = videoName.lastIndexOf(".");
+			if( idx != -1 ){
+				//获取文件的后缀名
+				var ext = videoName.substr(idx+1).toUpperCase();
+				//将后缀名变成小写
+				ext = ext.toLowerCase( );
+				if(ext != 'jpg' && ext != 'png' && ext != 'jpeg' && ext != 'gif' && ext != 'bmp'){
+					$("#image").tips({
+						side:3,
+						msg:'上传的图片格式错误',
+						bg:'#AE81FF',
+						time:2
+					});
+					return false;
+				} else {
+					$("#Form").submit();
+				}
+			} else {
+				$("#image").tips({
+					side:3,
+					msg:'上传的图片格式错误',
+					bg:'#AE81FF',
+					time:2
+				});
+				return false;
+			}
+		}
+		$("#newImg").click(function(imgnumber){
+//            alert("重新选择");
+			$("#imgcontext").empty();
+			$("#imgcontext").append(" <input type='file' id='image' name='image'/>"+
+					"<input  type='text' hidden='hidden' name='imgChange' id='imgChange' value='true'/>");
+		});
+		function fileChange2(){
+			//检测上传文件的类型
+			var videoName = $("#image2").val();
+			//获取"."所在的位置
+			var idx = videoName.lastIndexOf(".");
+			if( idx != -1 ){
+				//获取文件的后缀名
+				var ext = videoName.substr(idx+1).toUpperCase();
+				//将后缀名变成小写
+				ext = ext.toLowerCase( );
+				if(ext != 'jpg' && ext != 'png' && ext != 'jpeg' && ext != 'gif' && ext != 'bmp'){
+					$("#image2").tips({
+						side:3,
+						msg:'上传的图片格式错误',
+						bg:'#AE81FF',
+						time:2
+					});
+					return false;
+				} else {
+					$("#Form").submit();
+				}
+			} else {
+				$("#image2").tips({
+					side:3,
+					msg:'上传的图片格式错误',
+					bg:'#AE81FF',
+					time:2
+				});
+				return false;
+			}
+		}
+		$("#newImg2").click(function(imgnumber){
+//            alert("重新选择");
+			$("#imgcontext2").empty();
+			$("#imgcontext2").append(" <input type='file' id='image2' name='image2'/>"+
+					"<input  type='text' hidden='hidden' name='imgChange2' id='imgChange2' value='true'/>");
+		});
 		$(function() {
 			//日期框
 			$('.date-picker').datepicker({autoclose: true,todayHighlight: true});
