@@ -61,7 +61,7 @@
 														</span>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <input type="file" id="image" name="image"/>
+                                                      <input type="file" id="image" name="image"/>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </div>
