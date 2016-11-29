@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.halfwanybus.controller.base.BaseController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 /**@author liangzhilin
@@ -33,17 +34,30 @@ public class AppNavigationController extends BaseController {
 		mv.setViewName("frontpage/homepage");
 		return mv;
 	}
+	/**跳转到活动公告列表
+	 * @return
+	 */
+	@RequestMapping(value="/goatlist")
+	@ResponseBody
+	public ModelAndView goAtList() throws Exception {
+
+		PageData pd = new PageData();
+		List<PageData> varList= activitymanageService.listAll(pd);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("varList",varList);
+		mv.setViewName("frontpage/atlist");
+		return mv;
+	}
 	/**跳转到活动详情
 	 * @return
 	 */
 	@RequestMapping(value="/goatdetail")
 	@ResponseBody
 	public ModelAndView goAtDetail(
-			@RequestParam(value="image",required=false) String ACTIVITYMANAGE_ID
 	) throws Exception {
-		ACTIVITYMANAGE_ID = "1";
 		PageData pd = new PageData();
-		pd.put("ACTIVITYMANAGE_ID",ACTIVITYMANAGE_ID);
+		pd = this.getPageData();
+		pd.put("ACTIVITYMANAGE_ID",pd.getString("ACTIVITYMANAGE_ID"));
 		pd = activitymanageService.findById(pd);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("pd",pd);
