@@ -21,8 +21,5 @@ import com.halfwanybus.service.pagemanage.message.MessageManager;
 public class MessageService implements MessageManager{
 
 
-
-	
-	
 }
 
