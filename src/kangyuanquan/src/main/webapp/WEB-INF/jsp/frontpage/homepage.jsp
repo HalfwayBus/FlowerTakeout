@@ -75,46 +75,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
             </div>
             <div class="text_box box1">
-                <span class="mess_box">试试在不同的地方找到我？</span>
+                <span class="mess_box"><i class="fa fa-compass fas_tits"></i>试试在不同的地方找到我？</span>
                 <div class="down_line"></div>
                 <div class="up_line"></div>
                 <div class="down_line2"></div>
                 <div class="down_line3"></div>
-            </div>
-            <div class="printerWrapper">
-                <div class="paperWrapper">
-                    <div class="paperIn page1">Loading...</div>
-                    <div class="paperIn page2">Loading...</div>
-                    <div class="paperInsert"></div>
-                    <div class="paperSlot"></div>
-                    <div class="paperHide"></div>
-                </div>
-                <div class="printerTop"></div>
-                <div class="printerBody"></div>
-                <div class="bayWrapper">
-                    <div class="lightLarge">
-                        <div class="light">
-                        </div>
-                    </div>
-                    <div class="lightSmall">
-                        <div class="light">
-                        </div>
-                    </div>
-                    <div class="facePlate"></div>
-                    <div class="bayOpening"></div>
-                    <div class="bayTray"></div>
-                    <div class="paperOut"></div>
-                    <div class="paperOutShadow"></div>
-                </div>
-            </div>
-            <div class="text_box box3">
-                <div class="mess_p">
-                    <i class="fa fa-map-signs fa_tit"></i>
-                    <p>为你留下</p>
-                    <p>时光的印记</p>
-                    <p>你会...在哪里找到自己?</p>
-                    <div class="dot"><i class="fa fa-paper-plane dots"></i></div>
-                </div>
             </div>
             <div class="wrapper">
                 <div class="icon reminders">
@@ -233,6 +198,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <i class="fa fa-cloud-upload"></i>
                     <i class="fa fa-external-link"></i>
                     <i class="fa fa-qrcode"></i>
+                </div>
+            </div>
+            <div class="printerWrapper">
+                <div class="paperWrapper">
+                    <div class="paperIn page1">Loading...</div>
+                    <div class="paperIn page2">Loading...</div>
+                    <div class="paperInsert"></div>
+                    <div class="paperSlot"></div>
+                    <div class="paperHide"></div>
+                </div>
+                <div class="printerTop"></div>
+                <div class="printerBody"></div>
+                <div class="bayWrapper">
+                    <div class="lightLarge">
+                        <div class="light">
+                        </div>
+                    </div>
+                    <div class="lightSmall">
+                        <div class="light">
+                        </div>
+                    </div>
+                    <div class="facePlate"></div>
+                    <div class="bayOpening"></div>
+                    <div class="bayTray"></div>
+                    <div class="paperOut"></div>
+                    <div class="paperOutShadow"></div>
+                </div>
+            </div>
+            <div class="text_box box3">
+                <div class="mess_p">
+                    <i class="fa fa-map-signs fa_tit"></i>
+                    <p>为你留下</p>
+                    <p>时光的印记</p>
+                    <p>你会...在哪里找到自己?</p>
+                    <div class="dot"><i class="fa fa-paper-plane dots"></i></div>
                 </div>
             </div>
         </div>
