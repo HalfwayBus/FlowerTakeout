@@ -174,21 +174,25 @@ $(function() {
 
 
     /*定时器操作2*/
-   /* var t1=setInterval(function(){
+    var t1=setInterval(function(){
         if (j==1){
             mac_moveout();
             icno_movein();
         }
         if (j==2){
             icno_moveout();
+            prin_movein();
+        }
+        if (j==3){
             mac_movein();
+            prin_moveout();
             j=0;
         }
         j++;
     },7000);
 
     $(".changbox").hover(function(){
-        clearInterval(t1);   /!*鼠标移入时停止定时器*!/
+        clearInterval(t1);   /*鼠标移入时停止定时器*/
     },function(){
         t1=setInterval(function(){
             if (j==1){
@@ -197,16 +201,19 @@ $(function() {
             }
             if (j==2){
                 icno_moveout();
+                prin_movein();
+            }
+            if (j==3){
                 mac_movein();
+                prin_moveout();
                 j=0;
             }
             j++;
-        },7000);   /!*移出继续*!/
-    });*/
+        },7000);   /*移出继续*/
+    });
 
 
-    mac_moveout();
-    prin_movein()
+
     /*控制动画出入*/
     function mac_moveout() {
         $(".devices").animate({"right":"-600px"},1000);
@@ -228,11 +235,19 @@ $(function() {
     }
     function prin_moveout() {
         $(".printerWrapper").fadeOut(1000);
-        $(".box3").fadeOut(1000);
+        $(".box3").fadeOut(1600);
+        /*$(".mess_p i").fadeOut(1000);
+        $(".mess_p p").eq(0).fadeOut(1000);
+        $(".mess_p p").eq(1).fadeOut(1000);
+        $(".mess_p p").eq(2).fadeOut(1000);*/
     }
     function prin_movein() {
         $(".printerWrapper").fadeIn(800);
-        $(".box3").fadeIn(1000);
+        $(".box3").fadeIn(1600);
+        /*$(".mess_p i").fadeIn(1000);
+        $(".mess_p p").eq(0).fadeIn(1000);
+        $(".mess_p p").eq(1).fadeIn(1600);
+        $(".mess_p p").eq(2).fadeIn(2200);*/
     }
 
 });
