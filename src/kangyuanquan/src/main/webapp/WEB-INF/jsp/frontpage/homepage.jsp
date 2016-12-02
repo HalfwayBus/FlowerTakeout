@@ -235,6 +235,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="dot"><i class="fa fa-paper-plane dots"></i></div>
                 </div>
             </div>
+            <div class="i_box">
+                <i class="choose_i"></i>
+                <i></i>
+                <i></i>
+            </div>
+
         </div>
 
         <%--<div id="demo">
