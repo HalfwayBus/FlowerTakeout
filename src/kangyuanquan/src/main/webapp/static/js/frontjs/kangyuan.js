@@ -175,6 +175,7 @@ $(function() {
 
     /*定时器操作2*/
     var t1=setInterval(function(){
+        $(".i_box i").eq(j).addClass("choose_i").siblings().removeClass("choose_i");
         if (j==1){
             mac_moveout();
             icno_movein();
@@ -186,6 +187,7 @@ $(function() {
         if (j==3){
             mac_movein();
             prin_moveout();
+            $(".i_box i").eq(0).addClass("choose_i").siblings().removeClass("choose_i");
             j=0;
         }
         j++;
@@ -195,6 +197,7 @@ $(function() {
         clearInterval(t1);   /*鼠标移入时停止定时器*/
     },function(){
         t1=setInterval(function(){
+            $(".i_box i").eq(j).addClass("choose_i").siblings().removeClass("choose_i");
             if (j==1){
                 mac_moveout();
                 icno_movein();
@@ -204,8 +207,9 @@ $(function() {
                 prin_movein();
             }
             if (j==3){
-                mac_movein();
                 prin_moveout();
+                mac_movein();
+                $(".i_box i").eq(0).addClass("choose_i").siblings().removeClass("choose_i");
                 j=0;
             }
             j++;
@@ -236,18 +240,35 @@ $(function() {
     function prin_moveout() {
         $(".printerWrapper").fadeOut(1000);
         $(".box3").fadeOut(1600);
-        /*$(".mess_p i").fadeOut(1000);
-        $(".mess_p p").eq(0).fadeOut(1000);
-        $(".mess_p p").eq(1).fadeOut(1000);
-        $(".mess_p p").eq(2).fadeOut(1000);*/
     }
     function prin_movein() {
         $(".printerWrapper").fadeIn(800);
         $(".box3").fadeIn(1600);
-        /*$(".mess_p i").fadeIn(1000);
-        $(".mess_p p").eq(0).fadeIn(1000);
-        $(".mess_p p").eq(1).fadeIn(1600);
-        $(".mess_p p").eq(2).fadeIn(2200);*/
     }
+
+    /*小块切换动画*/
+    $(".i_box i").click(function () {
+        var num=$(this).index();
+        $(this).addClass("choose_i").siblings().removeClass("choose_i");
+        if (j==1){
+            mac_moveout();
+        }
+        if(j==2){
+            icno_moveout();
+        }
+        if (j==3){
+            prin_moveout();
+        }
+        if (num==0){
+            mac_movein()
+        }
+        if(num==1){
+            icno_movein();
+        }
+        if (num==2){
+            prin_movein();
+        }
+        j=num+1;
+    });
 
 });
