@@ -425,7 +425,7 @@
 .printerWrapper {
     position: absolute;
     top: 240px;
-    right: 311px;
+    right: 331px;
     transform: scale(0.8);
     display: none;
 }
