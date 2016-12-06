@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="btn btn_right">&gt;</div>
     <div class="menuContent">
         <div class="item">
-            <a href="#">购物广场<span>&#62;</span></a>
+            <a href="app_index/goshop.do">康园小店<span>&#62;</span></a>
         </div>
         <div class="item">
             <a href="#">活动分享<span>&#62;</span></a>

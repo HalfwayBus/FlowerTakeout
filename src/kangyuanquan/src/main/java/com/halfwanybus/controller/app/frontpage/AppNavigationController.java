@@ -42,6 +42,17 @@ public class AppNavigationController extends BaseController {
 		mv.setViewName("frontpage/homepage");
 		return mv;
 	}
+
+	/**去店铺列表
+	 * @return
+	 */
+	@RequestMapping(value="/goshop")
+	public ModelAndView goShop() throws Exception {
+		ModelAndView mv = new ModelAndView();
+
+		mv.setViewName("frontpage/shop");
+		return mv;
+	}
 	/**跳转到活动公告列表
 	 * @return
 	 */
