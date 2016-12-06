@@ -1,7 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
 <%
     String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
 %>
 
 <!DOCTYPE html>
@@ -127,6 +129,29 @@
         })
 
     }();
+    $("#sum").click(function () {
+        alert("你点击了提交");
+        var NAME = $("#name").val();
+        var PHONE = $("#phone").val();
+        var EMAIL = $("#email").val();
+        var MESSAGECONTENT = $("#text_box").val();
+        alert("你点击了提交");
+        $.ajax({
+            type: "POST",
+            url: '<%=basePath%>app_index/setMessage.do',
+            data: {
+                'NAME':NAME,
+                'PHONE':PHONE,
+                'EMAIL':EMAIL,
+                'MESSAGECONTENT':MESSAGECONTENT
+            },
+            dataType:'json',
+            cache: false,
+            success: function(data){
+               alert("留言成功");
+            }
+        });
+    });
 </script>
 </body>
 </html>

@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /** 
- * 说明：站内推荐表
+ * 说明：站内推荐
  * 创建人：liangzhilin
  * 创建时间：2016-08-24
  */

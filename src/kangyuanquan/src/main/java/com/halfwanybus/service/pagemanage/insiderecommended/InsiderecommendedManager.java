@@ -74,5 +74,7 @@ public interface InsiderecommendedManager{
 	 * 通过SPECIAL_ID数组批量删除item
 	 */
 	public void deleteAllBySpecialIds(String[] ids) throws Exception;
+
+	public List<PageData> listShow() throws Exception;
 }
 

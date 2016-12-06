@@ -1,6 +1,8 @@
 package com.halfwanybus.controller.app.frontpage;
 
 import com.halfwanybus.service.pagemanage.activitymanage.ActivityManageManager;
+import com.halfwanybus.service.pagemanage.insiderecommended.InsiderecommendedManager;
+import com.halfwanybus.service.pagemanage.message.MessageManager;
 import com.halfwanybus.util.PageData;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.halfwanybus.controller.base.BaseController;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 
@@ -22,15 +25,20 @@ import java.util.List;
 @Controller
 public class AppNavigationController extends BaseController {
 	@Resource(name="activitymanageService")
-	private ActivityManageManager activitymanageService;
+	private ActivityManageManager activitymanageService;//活动公告
+	@Resource(name="insiderecommendedService")
+	private InsiderecommendedManager insiderecommendedService;//站内推荐
+	@Resource(name="messageService")
+	private MessageManager messageService;
 	
 	/**去首页
 	 * @return
 	 */
 	@RequestMapping(value="/goindex")
-	@ResponseBody
-	public ModelAndView goIndex(){
+	public ModelAndView goIndex() throws Exception {
 		ModelAndView mv = new ModelAndView();
+		List<PageData> insiderList =  insiderecommendedService.listAll(null);//查询站内推荐轮播图
+		mv.addObject("insiderList",insiderList);
 		mv.setViewName("frontpage/homepage");
 		return mv;
 	}
@@ -38,9 +46,7 @@ public class AppNavigationController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value="/goatlist")
-	@ResponseBody
 	public ModelAndView goAtList() throws Exception {
-
 		PageData pd = new PageData();
 		List<PageData> varList= activitymanageService.listAll(pd);
 		ModelAndView mv = new ModelAndView();
@@ -52,7 +58,6 @@ public class AppNavigationController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping(value="/goatdetail")
-	@ResponseBody
 	public ModelAndView goAtDetail(
 	) throws Exception {
 		PageData pd = new PageData();
@@ -64,8 +69,30 @@ public class AppNavigationController extends BaseController {
 		mv.setViewName("frontpage/text");
 		return mv;
 	}
-
-	
+	/**跳转到活动详情
+	 * @return
+	 */
+	@RequestMapping(value="/goConnectUs")
+	public ModelAndView goConnectUs(
+	) throws Exception {
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("pd",pd);
+		mv.setViewName("frontpage/connect_us");
+		return mv;
+	}
+	@RequestMapping(value="/setMessage")
+	@ResponseBody
+	public Object SetMessage() throws Exception {
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		pd.put("MESSAGE_ID",this.get32UUID());
+		pd.put("MESSAGETIME",new Date());
+		messageService.save(pd);
+		pd.put("saveResult","success");
+		return pd;
+	}
 }
 	
  
