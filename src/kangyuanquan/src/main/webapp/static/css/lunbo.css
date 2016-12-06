@@ -5,6 +5,7 @@
     background-size: cover;
     position: absolute;
     top: 0;
+    display: none;
 }
 
 .banner{
