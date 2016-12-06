@@ -64,7 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <a href="#">精彩活动<span>&#62;</span></a>
         </div>
         <div class="item">
-            <a href="#">联系我们<span>&#62;</span></a>
+            <a href="app_index/goConnectUs">联系我们<span>&#62;</span></a>
         </div>
     </div>
 </div>
@@ -78,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="cont_box">
             <p><i class="fa fa-street-view"></i>活动</p>
         </div>
-        <div class="cont_box">
+        <div class="cont_box" href="app_index/goConnectUs">
             <p><i class="fa fa-send"></i>联系我们</p>
         </div>
     <div class="clear"></div>
