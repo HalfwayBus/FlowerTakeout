@@ -1,6 +1,7 @@
 package com.halfwanybus.controller.app.frontpage;
 
 import com.halfwanybus.service.pagemanage.activitymanage.ActivityManageManager;
+import com.halfwanybus.service.pagemanage.insiderecommended.InsiderecommendedManager;
 import com.halfwanybus.util.PageData;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,15 +23,19 @@ import java.util.List;
 @Controller
 public class AppNavigationController extends BaseController {
 	@Resource(name="activitymanageService")
-	private ActivityManageManager activitymanageService;
+	private ActivityManageManager activitymanageService;//活动公告
+	@Resource(name="insiderecommendedService")
+	private InsiderecommendedManager insiderecommendedService;//站内推荐
 	
 	/**去首页
 	 * @return
 	 */
 	@RequestMapping(value="/goindex")
 	@ResponseBody
-	public ModelAndView goIndex(){
+	public ModelAndView goIndex() throws Exception {
 		ModelAndView mv = new ModelAndView();
+		List<PageData> insiderList =  insiderecommendedService.listAll(null);//查询站内推荐轮播图
+		mv.addObject("insiderList",insiderList);
 		mv.setViewName("frontpage/homepage");
 		return mv;
 	}
@@ -40,7 +45,6 @@ public class AppNavigationController extends BaseController {
 	@RequestMapping(value="/goatlist")
 	@ResponseBody
 	public ModelAndView goAtList() throws Exception {
-
 		PageData pd = new PageData();
 		List<PageData> varList= activitymanageService.listAll(pd);
 		ModelAndView mv = new ModelAndView();
@@ -64,8 +68,6 @@ public class AppNavigationController extends BaseController {
 		mv.setViewName("frontpage/text");
 		return mv;
 	}
-
-	
 }
 	
  

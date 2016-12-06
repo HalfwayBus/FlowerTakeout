@@ -116,6 +116,12 @@ public class InsiderecommendedService implements InsiderecommendedManager {
 	public void deleteAllBySpecialIds(String[] ids) throws Exception {
 		dao.delete("InsiderecommendedMapper.deleteAllBySpecialIds", ids);
 	}
-	
+    /**
+	 * 查询可以显示的链表
+	 * */
+	public List<PageData> listShow() throws Exception {
+
+		return (List<PageData>)dao.findForList("InsiderecommendedMapper.listShow", null);
+	}
 }
 

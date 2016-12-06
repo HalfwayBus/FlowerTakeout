@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -36,15 +38,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <jsp:include page="head.jsp"></jsp:include>
 <div class="banner">
-    <ul class="img">
-        <li><a href="#"><img src="static/images/img/1.jpg"></a></li>
-        <li><a href="#"><img src="static/images/img/2.jpg"></a></li>
-        <li><a href="#"><img src="static/images/img/3.jpg"></a></li>
-        <li><a href="#"><img src="static/images/img/4.jpg"></a></li>
-        <li><a href="#"><img src="static/images/img/5.jpg"></a></li>
-        <li><a href="#"><img src="static/images/img/6.jpg"></a></li>
-    </ul>
-
+    <c:choose>
+        <c:when test="${not empty insiderList}">
+          <ul class="img">
+            <c:forEach items="${insiderList}" var="var" varStatus="vs">
+                   <li><a href="${var.LINK}"><img src="${var.IMG_PATH}"></a></li>
+            </c:forEach>
+          </ul>
+        </c:when>
+    </c:choose>
     <ul class="num">
 
     </ul>
@@ -80,7 +82,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <p><i class="fa fa-send"></i>联系我们</p>
         </div>
     <div class="clear"></div>
-
 </div>
 <a href="javascript:;" class="top">回到顶部</a>  <!--href设置为此，为绝对的空连接，点击不返回任何数值，此例中如此设置来制作平滑上滚-->
 </body>
