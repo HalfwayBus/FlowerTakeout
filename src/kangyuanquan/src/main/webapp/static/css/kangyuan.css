@@ -5,7 +5,8 @@ ul,li,a,div,span,html, body,h2{
 body {
     line-height: 1;
     min-width: 1024px;
-    background-image: url(../images/img/bg.png);
+    /*background-image: url(../images/img/bg.png);*/
+    background-image: url(../images/img/bk.jpg);
     background-size: cover;
 }
 ul, ol, li {
@@ -431,7 +432,6 @@ input, textarea {
     display: inline-block;
     padding: 6px 15px;
     margin-bottom: 0;
-    margin-left: 375px;
     margin-top: -3px;
     font-size: 14px;
     font-weight: 400;
