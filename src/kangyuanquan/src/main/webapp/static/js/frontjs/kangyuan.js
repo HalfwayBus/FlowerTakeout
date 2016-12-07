@@ -6,7 +6,7 @@ $(function() {
     /*判断填写内容是否为空*/
     actions();
     function actions(){
-        $(".btn").click(function(){
+        $(".btn_sub").click(function(){
             if_null();
         })
     }
