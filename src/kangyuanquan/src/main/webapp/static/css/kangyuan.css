@@ -6,7 +6,7 @@ body {
     line-height: 1;
     min-width: 1024px;
     /*background-image: url(../images/img/bg.png);*/
-    background-image: url(../images/img/bk.jpg);
+    background: url(../images/img/bk.jpg) no-repeat;
     background-size: cover;
 }
 ul, ol, li {
@@ -428,7 +428,7 @@ input, textarea {
     outline: none;
 }
 
-.btn {
+.btn_sub {
     display: inline-block;
     padding: 6px 15px;
     margin-bottom: 0;
@@ -444,7 +444,7 @@ input, textarea {
     color: whitesmoke;
 }
 
-.btn:hover {
+.btn_sub:hover {
     background: #337ab7;
     color: white;
 }
@@ -582,16 +582,15 @@ button.close {
     font-size: 16px;
 }
 .addmore i{
-    display: block;
     position: relative;
-    left: 25px;
+    left: -41px;
     font-size: 20px;
-    top: 5px;
+    top: 20px;
     animation: up_move 1.2s infinite;
 }
 @keyframes up_move {
     50%{
-        top: 15px;
+        top: 35px;
     }
 }
 .addmore:hover{
@@ -600,13 +599,110 @@ button.close {
 
 /*商品详情*/
 .river_box{
-    column-width:256px;
-    column-gap:5px;
+    /*column-width:256px;
+    column-gap:5px;*/
+    margin-top: 30px;
 }
 
 .shopping{
-    width:240px;
-    height: 340px;
+    float: left;
+    width:316px;
+    height: 410px;
+    overflow: hidden;
     box-shadow: 0 2px 10px #777a81;
+    margin: 10px;
+    transition: all 0.5s;
+}
+.shopping:hover{
+    transform: scale(1.1);
+    transition: all 0.5s;
+}
+.shopping img{
+    width: 316px;
+    height: 200px;
+}
+.shopping_text{
+    padding: 15px;
+}
+.shopping_text h3{
+    font-size: 18px;
+    font-family: "微软雅黑", "华文细黑";
+    font-weight: 600;
+}
+.shopping_text p{
+    font-size: 15px;
+    line-height: 19px;
+    font-family: "微软雅黑", "楷体", "华文细黑";
+}
+.shopping_text a{
+    color: rgba(11, 11, 11, 0.87);
+}
+.shopping_text a:hover{
+    color: #0b0b0b;
+}
+
+/*活动版面*/
+.text_line{
+    margin-top: 30px;
+    min-height: 580px;
+}
+.text_line ul{
+    list-style: disc;
+}
+.text_line li{
+    font-size: 18px;
+    font-family: "微软雅黑", "楷体", "华文细黑";
+    line-height: 30px;
+    border-bottom: dotted 1px #818181;
+    margin-bottom: 6px;
+    text-shadow: 1px 1px 3px #c5c5c5;
+}
+.text_line a{
+    color: rgba(11, 11, 11, 0.64);
+}
+.text_line a:hover{
+    color: #0b0b0b;
+}
+.text_line span{
+    float: right;
+    color: rgba(11, 11, 11, 0.64);
+}
+
+
+/*订单*/
+.shop_line_pag{
+    width: 1185px;
+}
+.shop_line{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.shop_line_box{
+    width: 370px;
     margin: 8px;
+    border-radius: 20px;
+    box-shadow: 0 5px 10px #969696;
+    padding: 35px;
+    float: left;
+}
+.shop_line_box h2{
+    font-family: "微软雅黑", "楷体", "华文细黑";
+    font-size: 20px;
+    text-shadow: 1px 1px 2px rgba(119, 122, 129, 0.75);
+    margin-bottom: 12px;
+}
+.shop_line_box p{
+    font-family: "微软雅黑", "楷体", "华文细黑";
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+}
+.shop_line_box img{
+    width: 300px;
+    height: 200px;
+    margin-bottom: 12px;
+    border-radius: 5px;
+}
+.shop_line_box i{
+    margin: 0 7px;
 }
