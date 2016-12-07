@@ -66,7 +66,7 @@
             <input type="text" id="phone" class="form-control" placeholder="电话:" required="required">
             <input type="text" id="email" class="form-control" placeholder="E-mail:" required="required">
         </div>
-        <button type="submit" class="btn" id="sum">提交</button>
+        <button type="submit" class="btn_sub" id="sum">提交</button>
         <div class="clear"></div>
     </div>
 
