@@ -3,6 +3,7 @@ package com.halfwanybus.controller.app.frontpage;
 import com.halfwanybus.service.pagemanage.activitymanage.ActivityManageManager;
 import com.halfwanybus.service.pagemanage.insiderecommended.InsiderecommendedManager;
 import com.halfwanybus.service.pagemanage.message.MessageManager;
+import com.halfwanybus.service.shopmanage.stopmanage.StopManageManager;
 import com.halfwanybus.util.PageData;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,8 @@ public class AppNavigationController extends BaseController {
 	private InsiderecommendedManager insiderecommendedService;//站内推荐
 	@Resource(name="messageService")
 	private MessageManager messageService;
+	@Resource(name="stopmanageService")
+	private StopManageManager stopmanageService;
 	
 	/**去首页
 	 * @return
@@ -42,6 +45,27 @@ public class AppNavigationController extends BaseController {
 		mv.setViewName("frontpage/homepage");
 		return mv;
 	}
+	/**跳转到订单页面
+	 * @return
+	 */
+	@RequestMapping(value="/goshopline")
+	public ModelAndView goShopLine() throws Exception {
+		ModelAndView mv = new ModelAndView();
+
+		mv.setViewName("frontpage/shop_line");
+		return mv;
+	}
+	/**跳转到店内页面
+	 * @return
+	 */
+	@RequestMapping(value="/goshopping")
+	public ModelAndView goShopping() throws Exception {
+		ModelAndView mv = new ModelAndView();
+
+		mv.setViewName("frontpage/shopping");
+		return mv;
+	}
+
 
 	/**去店铺列表
 	 * @return
@@ -49,7 +73,8 @@ public class AppNavigationController extends BaseController {
 	@RequestMapping(value="/goshop")
 	public ModelAndView goShop() throws Exception {
 		ModelAndView mv = new ModelAndView();
-
+		List<PageData> shopList = stopmanageService.listAll(null);
+		mv.addObject("shopList",shopList);
 		mv.setViewName("frontpage/shop");
 		return mv;
 	}
@@ -62,7 +87,7 @@ public class AppNavigationController extends BaseController {
 		List<PageData> varList= activitymanageService.listAll(pd);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("varList",varList);
-		mv.setViewName("frontpage/atlist");
+		mv.setViewName("frontpage/live");
 		return mv;
 	}
 	/**跳转到活动详情
@@ -80,7 +105,7 @@ public class AppNavigationController extends BaseController {
 		mv.setViewName("frontpage/text");
 		return mv;
 	}
-	/**跳转到活动详情
+	/**跳转到联系我们
 	 * @return
 	 */
 	@RequestMapping(value="/goConnectUs")

@@ -1,4 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" isELIgnored="false" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -23,67 +25,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="local">
         <a href="#">首页</a> \ <a href="#">店铺浏览</a><i class="fa fa-arrow-left"></i>
     </div>
-    <div class="live_box">
-        <div class="shop_box">
-            <img src="static/images/img/1.jpg">
-            <a href="#">
-            <div class="live_box_text">
-                <h2>店铺名号</h2>
-                <p>商品信息：纷纷落叶飘向大地，白雪下种子沉睡，一朵花开了又迅速枯萎，在流转的光的阴影中，星图不断变幻，海水中矗起高山，草木几百代的荣枯，总有一片片的迎风挺立，酷似它们的祖先。</p>
-            </div>
-            <span class="tessline">店铺详情<i class="fa fa-arrow-circle-right"></i></span>
-            </a>
-        </div>
-        <div class="shop_box">
-            <img src="static/images/img/2.jpg">
-            <a href="#">
-                <div class="live_box_text">
-                    <h2>店铺名号</h2>
-                    <p>商品信息：纷纷落叶飘向大地，白雪下种子沉睡，一朵花开了又迅速枯萎，在流转的光的阴影中，星图不断变幻，海水中矗起高山，草木几百代的荣枯，总有一片片的迎风挺立，酷似它们的祖先。</p>
-                </div>
-                <span class="tessline">店铺详情<i class="fa fa-arrow-circle-right"></i></span>
-            </a>
-        </div>
-        <div class="shop_box">
-            <img src="static/images/img/3.jpg">
-            <a href="#">
-                <div class="live_box_text">
-                    <h2>店铺名号</h2>
-                    <p>商品信息：纷纷落叶飘向大地，白雪下种子沉睡，一朵花开了又迅速枯萎，在流转的光的阴影中，星图不断变幻，海水中矗起高山，草木几百代的荣枯，总有一片片的迎风挺立，酷似它们的祖先。</p>
-                </div>
-                <span class="tessline">店铺详情<i class="fa fa-arrow-circle-right"></i></span>
-            </a>
-        </div>
-        <div class="shop_box">
-            <img src="static/images/img/4.jpg">
-            <a href="#">
-                <div class="live_box_text">
-                    <h2>店铺名号</h2>
-                    <p>商品信息：纷纷落叶飘向大地，白雪下种子沉睡，一朵花开了又迅速枯萎，在流转的光的阴影中，星图不断变幻，海水中矗起高山，草木几百代的荣枯，总有一片片的迎风挺立，酷似它们的祖先。</p>
-                </div>
-                <span class="tessline">店铺详情<i class="fa fa-arrow-circle-right"></i></span>
-            </a>
-        </div>
-        <div class="shop_box">
-            <img src="static/images/img/5.jpg">
-            <a href="#">
-                <div class="live_box_text">
-                    <h2>店铺名号</h2>
-                    <p>商品信息：纷纷落叶飘向大地，白雪下种子沉睡，一朵花开了又迅速枯萎，在流转的光的阴影中，星图不断变幻，海水中矗起高山，草木几百代的荣枯，总有一片片的迎风挺立，酷似它们的祖先。</p>
-                </div>
-                <span class="tessline">店铺详情<i class="fa fa-arrow-circle-right"></i></span>
-            </a>
-        </div>
-        <div class="shop_box">
-            <img src="static/images/img/6.jpg">
-            <a href="#">
-                <div class="live_box_text">
-                    <h2>店铺名号</h2>
-                    <p>商品信息：纷纷落叶飘向大地，白雪下种子沉睡，一朵花开了又迅速枯萎，在流转的光的阴影中，星图不断变幻，海水中矗起高山，草木几百代的荣枯，总有一片片的迎风挺立，酷似它们的祖先。</p>
-                </div>
-                <span class="tessline">店铺详情<i class="fa fa-arrow-circle-right"></i></span>
-            </a>
-        </div>
+    <div href="app_index/goshopping.do" class="live_box">
+            <c:if test="${not empty shopList}">
+                <ul class="img">
+                    <c:forEach items="${shopList}" var="var" varStatus="vs">
+                        <div class="shop_box">
+                            <img src="${var.LOGO}">
+                            <a href="app_index/goshopping.do?STOPMANAGE_ID=${var.STOPMANAGE_ID}">
+                                <div class="live_box_text">
+                                    <h2>${var.STOPNAME}</h2>
+                                    <p>商品信息：${var.INTRODUCTION}</p>
+                                </div>
+                                <span class="tessline">进入店铺<i class="fa fa-arrow-circle-right"></i></span>
+                            </a>
+                        </div>
+                    </c:forEach>
+                </ul>
+            </c:if>
     </div>
 </div>
 <a href="javascript:;" class="addmore">加载更多<i class="fa fa-arrow-circle-o-down"></i></a>
