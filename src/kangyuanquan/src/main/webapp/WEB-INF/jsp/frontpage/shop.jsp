@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <ul class="img">
                     <c:forEach items="${shopList}" var="var" varStatus="vs">
                         <div class="shop_box">
-                            <img src="${var.LOGO}">
+                            <img src="${pageContext.request.contextPath}${var.LOGO}">
                             <a href="app_index/goshopping.do?STOP_IDsa=${var.STOPMANAGE_ID}">
                                 <div class="live_box_text">
                                     <h2>${var.STOPNAME}</h2>

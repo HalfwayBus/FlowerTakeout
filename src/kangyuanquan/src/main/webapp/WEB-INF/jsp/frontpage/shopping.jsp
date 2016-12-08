@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <c:if test="${not empty goodsList}">
             <c:forEach items="${goodsList}" var="var" varStatus="vs">
                 <div class="shopping">
-                    <img src="static/images/img/1.jpg">
+                    <img src="${pageContext.request.contextPath}${var.IMG_PATH}">
                     <div class="shopping_text">
                         <h3>${var.NAME}</h3>
                         <p>${var.DETAIL}</p>

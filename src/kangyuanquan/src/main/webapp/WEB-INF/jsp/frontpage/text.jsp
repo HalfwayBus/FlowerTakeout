@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
 
         <div class="text_img">
-            <img src="${pd.IMG_PATH}">
+            <img src="${pageContext.request.contextPath}${pd.IMG_PATH}">
         </div>
         <div class="text_content">
             ${pd.DESCRIBES}

@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <c:when test="${not empty insiderList}">
           <ul class="img">
             <c:forEach items="${insiderList}" var="var" varStatus="vs">
-                   <li><a href="${var.LINK}"><img src="${var.IMG_PATH}"></a></li>
+                   <li><a href="${var.LINK}"><img src="${pageContext.request.contextPath}${var.IMG_PATH}"></a></li>
             </c:forEach>
           </ul>
         </c:when>
@@ -69,18 +69,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 </div>
 <div class="content">
-        <div class="cont_box">
-            <p><i class="fa fa-shopping-cart"></i>高效购物</p>
-        </div>
+        <a href="app_index/goshop.do">
+            <div class="cont_box">
+                <p><i class="fa fa-shopping-cart"></i>高效购物</p>
+            </div>
+        </a>
         <div class="cont_box" onclick="not_open();">
             <p><i class="fa fa-share-alt-square"></i>资源共享</p>
         </div>
         <div class="cont_box" onclick="not_open();">
             <p><i class="fa fa-street-view"></i>广商论坛</p>
         </div>
-        <div class="cont_box" href="app_index/goConnectUs">
-            <p><i class="fa fa-send"></i>联系我们</p>
-        </div>
+        <a href="app_index/goConnectUs.do">
+            <div class="cont_box" href="app_index/goConnectUs">
+                <p><i class="fa fa-send"></i>联系我们</p>
+            </div>
+        </a>
     <div class="clear"></div>
 </div>
 <a href="javascript:;" class="top">回到顶部</a>  <!--href设置为此，为绝对的空连接，点击不返回任何数值，此例中如此设置来制作平滑上滚-->

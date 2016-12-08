@@ -65,6 +65,7 @@ public class InsiderecommendedController extends BaseController {
 			session.removeAttribute("image");
 		}
 		pd.put("IMG_PATH",imageUrl);
+		pd.put("LINK",LINK);
 		insiderecommendedService.save(pd);
 		mv.addObject("msg","success");
 		mv.setViewName("save_result");
@@ -144,14 +145,7 @@ public class InsiderecommendedController extends BaseController {
 		}
 		page.setPd(pd);
 		List<PageData>	varList = insiderecommendedService.list(page);	//列出Insiderecommended列表
-		
-		for(int i = 0; i < varList.size();i++ ) {
-			if(varList.get(i).getString("LINK").length()>15)
-			{
-				String text = varList.get(i).getString("LINK").substring(0, 15)+"......";
-				varList.get(i).put("LINK", text);
-			}
-		}
+
 		PageData special = new PageData();
 		mv.setViewName("pagemanage/insiderecommended/insiderecommended_list");
 		mv.addObject("varList", varList);
