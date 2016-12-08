@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" isELIgnored="false" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -29,7 +29,12 @@
 				<div class="page-content">
 					<div class="row">
 						<div class="col-xs-12">
-						<form action="stopmanage/list.do" method="post" name="Form" id="Form">
+							
+						<!-- 检索  -->
+						<form action="goods/list.do" method="post" name="Form" id="Form">
+						当前商铺ID:${pd.STOP_ID}
+						<!-- 检索  -->
+					
 						<table id="simple-table" class="table table-striped table-bordered table-hover" style="margin-top:5px;">	
 							<thead>
 								<tr>
@@ -37,13 +42,10 @@
 									<label class="pos-rel"><input type="checkbox" class="ace" id="zcheckbox" /><span class="lbl"></span></label>
 									</th>
 									<th class="center" style="width:50px;">序号</th>
-									<th class="center">店主</th>
-									<th class="center">店铺名</th>
+									<th class="center">店铺ID</th>
+									<th class="center">价格</th>
 									<th class="center">描述</th>
-									<th class="center">地址</th>
-									<th class="center">电话</th>
-									<th class="center">图标</th>
-									<th class="center">店内图</th>
+									<th class="center">商品图</th>
 									<th class="center">操作</th>
 								</tr>
 							</thead>
@@ -56,46 +58,32 @@
 									<c:forEach items="${varList}" var="var" varStatus="vs">
 										<tr>
 											<td class='center'>
-												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.STOPMANAGE_ID}" class="ace" /><span class="lbl"></span></label>
+												<label class="pos-rel"><input type='checkbox' name='ids' value="${var.GOODS_ID}" class="ace" /><span class="lbl"></span></label>
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
-											<td class='center'>${var.OWNER}</td>
-											<td class='center'>${var.STOPNAME}</td>
-											<td class='center'>${var.INTRODUCTION}</td>
-											<td class='center'>${var.ADDRESS}</td>
-											<td class='center'>${var.PHONE}</td>
+											<td class='center'>${var.STOP_ID}</td>
+											<td class='center'>${var.PRICE}</td>
+											<td class='center'>${var.DETAIL}</td>
 											<td class='center'>
 												<c:choose>
-												<c:when test="${var.LOGO!=null}">
-												<div style="margin: 0 auto; width:150px;overflow:hidden"><img style="height: 80px;" src="${pageContext.request.contextPath}${var.LOGO}"/><div>
+												<c:when test="${var.IMG_PATH!=null}">
+												<div style="margin: 0 auto; width:150px;overflow:hidden"><img style="height: 80px;" src="${pageContext.request.contextPath}${var.IMG_PATH}"/><div>
 													</c:when>
 													<c:otherwise>无</c:otherwise>
 													</c:choose>
 											</td>
-											<td class='center'>
-												<c:choose>
-												<c:when test="${var.STOPIMG!=null}">
-												<div style="margin: 0 auto; width:150px;overflow:hidden"><img style="height: 80px;" src="${pageContext.request.contextPath}${var.STOPIMG}"/><div>
-													</c:when>
-													<c:otherwise>无</c:otherwise>
-													</c:choose>
-											</td>
-
 											<td class="center">
 												<c:if test="${QX.edit != 1 && QX.del != 1 }">
 												<span class="label label-large label-grey arrowed-in-right arrowed-in"><i class="ace-icon fa fa-lock" title="无权限"></i></span>
 												</c:if>
 												<div class="hidden-sm hidden-xs btn-group">
-													<c:if test="${QX.edit == 1 }">
-													<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.STOPMANAGE_ID}');">
-														<i class="ace-icon fa fa-pencil-square-o bigger-120" title="编辑"></i>
-													</a>
-													<a class="btn btn-xs btn-success" title="商品" href="goods/list.do?STOP_ID=${var.STOPMANAGE_ID}">
-														<i class="ace-icon glyphicon glyphicon-shopping-cart bigger-120" title="商品"></i>
-													</a>
-													</c:if>
+													<%--<c:if test="${QX.edit == 1 }">--%>
+													<%--<a class="btn btn-xs btn-success" title="编辑" onclick="edit('${var.GOODS_ID}');">--%>
+														<%--<i class="ace-icon fa fa-pencil-square-o bigger-120" title="编辑"></i>--%>
+													<%--</a>--%>
+													<%--</c:if>--%>
 													<c:if test="${QX.del == 1 }">
-													<a class="btn btn-xs btn-danger" onclick="del('${var.STOPMANAGE_ID}');">
+													<a class="btn btn-xs btn-danger" onclick="del('${var.GOODS_ID}');">
 														<i class="ace-icon fa fa-trash-o bigger-120" title="删除"></i>
 													</a>
 													</c:if>
@@ -107,18 +95,18 @@
 														</button>
 			
 														<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-															<c:if test="${QX.edit == 1 }">
-															<li>
-																<a style="cursor:pointer;" onclick="edit('${var.STOPMANAGE_ID}');" class="tooltip-success" data-rel="tooltip" title="修改">
-																	<span class="green">
-																		<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-															</c:if>
+															<%--<c:if test="${QX.edit == 1 }">--%>
+															<%--<li>--%>
+																<%--<a style="cursor:pointer;" onclick="edit('${var.GOODS_ID}');" class="tooltip-success" data-rel="tooltip" title="修改">--%>
+																	<%--<span class="green">--%>
+																		<%--<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>--%>
+																	<%--</span>--%>
+																<%--</a>--%>
+															<%--</li>--%>
+															<%--</c:if>--%>
 															<c:if test="${QX.del == 1 }">
 															<li>
-																<a style="cursor:pointer;" onclick="del('${var.STOPMANAGE_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
+																<a style="cursor:pointer;" onclick="del('${var.GOODS_ID}');" class="tooltip-error" data-rel="tooltip" title="删除">
 																	<span class="red">
 																		<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																	</span>
@@ -255,7 +243,7 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="新增";
-			 diag.URL = '<%=basePath%>stopmanage/goAdd.do';
+			 diag.URL = '<%=basePath%>goods/goAdd.do?STOP_ID=${pd.STOP_ID}';
 			 diag.Width = 450;
 			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
@@ -277,7 +265,7 @@
 			bootbox.confirm("确定要删除吗?", function(result) {
 				if(result) {
 					top.jzts();
-					var url = "<%=basePath%>stopmanage/delete.do?STOPMANAGE_ID="+Id+"&tm="+new Date().getTime();
+					var url = "<%=basePath%>goods/delete.do?GOODS_ID="+Id+"&tm="+new Date().getTime();
 					$.get(url,function(data){
 						nextPage(${page.currentPage});
 					});
@@ -291,9 +279,9 @@
 			 var diag = new top.Dialog();
 			 diag.Drag=true;
 			 diag.Title ="编辑";
-			 diag.URL = '<%=basePath%>stopmanage/goEdit.do?STOPMANAGE_ID='+Id;
-			 diag.Width = 800;
-			 diag.Height = 700;
+			 diag.URL = '<%=basePath%>goods/goEdit.do?GOODS_ID='+Id;
+			 diag.Width = 450;
+			 diag.Height = 355;
 			 diag.CancelEvent = function(){ //关闭事件
 				 if(diag.innerFrame.contentWindow.document.getElementById('zhongxin').style.display == 'none'){
 					 nextPage(${page.currentPage});
@@ -332,7 +320,7 @@
 							top.jzts();
 							$.ajax({
 								type: "POST",
-								url: '<%=basePath%>stopmanage/deleteAll.do?tm='+new Date().getTime(),
+								url: '<%=basePath%>goods/deleteAll.do?tm='+new Date().getTime(),
 						    	data: {DATA_IDS:str},
 								dataType:'json',
 								//beforeSend: validateData,
@@ -351,7 +339,7 @@
 		
 		//导出excel
 		function toExcel(){
-			window.location.href='<%=basePath%>stopmanage/excel.do';
+			window.location.href='<%=basePath%>goods/excel.do';
 		}
 	</script>
 

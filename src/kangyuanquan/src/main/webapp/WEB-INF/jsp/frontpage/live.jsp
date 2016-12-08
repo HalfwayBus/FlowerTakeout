@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -25,15 +27,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <div class="text_line">
         <ul>
-            <li><a href="#">活动版面测试记录条，此处仅作测试，所以长长长长</a><span>2016-12-06</span></li>
-            <li><a href="#">活动版面测试记录条，此处仅作测试，所以长长长长</a><span>2016-12-06</span></li>
-            <li><a href="#">活动版面测试记录条，此处仅作测试，所以长长长长</a><span>2016-12-06</span></li>
-            <li><a href="#">活动版面测试记录条，此处仅作测试，所以长长长长</a><span>2016-12-06</span></li>
-            <li><a href="#">活动版面测试记录条，此处仅作测试，所以长长长长</a><span>2016-12-06</span></li>
-            <li><a href="#">活动版面测试记录条，此处仅作测试，所以长长长长</a><span>2016-12-06</span></li>
-            <li><a href="#">活动版面测试记录条，此处仅作测试，所以长长长长</a><span>2016-12-06</span></li>
-            <li><a href="#">活动版面测试记录条，此处仅作测试，所以长长长长</a><span>2016-12-06</span></li>
-            <li><a href="#">活动版面测试记录条，此处仅作测试，所以长长长长</a><span>2016-12-06</span></li>
+            <c:choose>
+                <c:when test="${not empty varList}">
+                    <c:forEach items="${varList}" var="var" varStatus="vs">
+                        <li><a href="app_index/goatdetail.do?ACTIVITYMANAGE_ID=${var.ACTIVITYMANAGE_ID}">${var.TITLE}</a><span>${var.ADDTIME}</span></li>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    抱歉，最近没有活动，敬请期待
+                </c:otherwise>
+            </c:choose>
         </ul>
     </div>
 </div>
