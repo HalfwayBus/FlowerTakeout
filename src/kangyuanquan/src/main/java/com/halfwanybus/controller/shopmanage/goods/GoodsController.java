@@ -54,6 +54,7 @@ public class GoodsController extends BaseController {
 			@RequestParam(value="image",required=false) CommonsMultipartFile image,
 			HttpSession session,
 			@RequestParam(value="STOP_ID",required=false) String STOP_ID,
+			@RequestParam(value="NAME",required=false) String NAME,
 			@RequestParam(value="PRICE",required=false) String PRICE,
 			@RequestParam(value="DETAIL",required=false) String DETAIL
 	) throws Exception{
@@ -72,6 +73,7 @@ public class GoodsController extends BaseController {
 		}
 		pd.put("IMG_PATH",imageUrl);
 		pd.put("STOP_ID",STOP_ID);
+		pd.put("NAME",NAME);
 		pd.put("PRICE",PRICE);
 		pd.put("DETAIL",DETAIL);
 		goodsService.save(pd);

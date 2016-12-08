@@ -62,6 +62,9 @@ a:focus{
     color: #43458b;
     cursor: pointer;
 }
+.head_ba:hover{
+    color: #4c4ebf;
+}
 .nav ul{
     display: inline-block;
     float: right;
@@ -433,6 +436,7 @@ input, textarea {
     padding: 6px 15px;
     margin-bottom: 0;
     margin-top: -3px;
+    margin-left: 353px;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.42857143;

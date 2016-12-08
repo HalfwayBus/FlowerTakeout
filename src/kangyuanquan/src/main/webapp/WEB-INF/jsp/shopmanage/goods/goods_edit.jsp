@@ -36,6 +36,10 @@
 								<td><input type="text" name="STOP_ID" id="STOP_ID" value="${pd.STOP_ID}" maxlength="100" placeholder="这里输入店铺ID" title="店铺ID" style="width:98%;"/></td>
 							</tr>
 							<tr>
+								<td style="width:75px;text-align: right;padding-top: 13px;">商品名:</td>
+								<td><input type="text" name="NAME" id="NAME" value="${pd.NAME}" maxlength="100" placeholder="这里输入店铺ID" title="店铺ID" style="width:98%;"/></td>
+							</tr>
+							<tr>
 								<td style="width:75px;text-align: right;padding-top: 13px;">价格:</td>
 								<td><input type="text" name="PRICE" id="PRICE" value="${pd.PRICE}" maxlength="255" placeholder="这里输入价格" title="价格" style="width:98%;"/></td>
 							</tr>

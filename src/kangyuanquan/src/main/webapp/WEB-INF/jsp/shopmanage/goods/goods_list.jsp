@@ -43,6 +43,7 @@
 									</th>
 									<th class="center" style="width:50px;">序号</th>
 									<th class="center">店铺ID</th>
+									<th class="center">商品名</th>
 									<th class="center">价格</th>
 									<th class="center">描述</th>
 									<th class="center">商品图</th>
@@ -62,6 +63,7 @@
 											</td>
 											<td class='center' style="width: 30px;">${vs.index+1}</td>
 											<td class='center'>${var.STOP_ID}</td>
+											<td class='center'>${var.NAME}</td>
 											<td class='center'>${var.PRICE}</td>
 											<td class='center'>${var.DETAIL}</td>
 											<td class='center'>

@@ -1,8 +1,10 @@
 package com.halfwanybus.controller.app.frontpage;
 
+import com.halfwanybus.entity.Page;
 import com.halfwanybus.service.pagemanage.activitymanage.ActivityManageManager;
 import com.halfwanybus.service.pagemanage.insiderecommended.InsiderecommendedManager;
 import com.halfwanybus.service.pagemanage.message.MessageManager;
+import com.halfwanybus.service.shopmanage.goods.GoodsManager;
 import com.halfwanybus.service.shopmanage.stopmanage.StopManageManager;
 import com.halfwanybus.util.PageData;
 import org.springframework.stereotype.Controller;
@@ -30,9 +32,11 @@ public class AppNavigationController extends BaseController {
 	@Resource(name="insiderecommendedService")
 	private InsiderecommendedManager insiderecommendedService;//站内推荐
 	@Resource(name="messageService")
-	private MessageManager messageService;
+	private MessageManager messageService;//留言
 	@Resource(name="stopmanageService")
-	private StopManageManager stopmanageService;
+	private StopManageManager stopmanageService;//商铺
+	@Resource(name="goodsService")
+	private GoodsManager goodsService;//商品
 	
 	/**去首页
 	 * @return
@@ -61,7 +65,16 @@ public class AppNavigationController extends BaseController {
 	@RequestMapping(value="/goshopping")
 	public ModelAndView goShopping() throws Exception {
 		ModelAndView mv = new ModelAndView();
-
+		PageData pd = new PageData();
+		pd = this.getPageData();
+		String keywords = pd.getString("STOP_ID");				//查询该店铺的上品
+		if(null != keywords && !"".equals(keywords)){
+			pd.put("keywords", keywords);
+		}
+		Page page = new Page();
+		page.setPd(pd);
+        List<PageData> goodsList= goodsService.list(page);
+		mv.addObject("goodsList",goodsList);
 		mv.setViewName("frontpage/shopping");
 		return mv;
 	}

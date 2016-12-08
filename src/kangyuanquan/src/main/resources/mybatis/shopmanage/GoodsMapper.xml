@@ -10,6 +10,7 @@
 	<!-- 字段 -->
 	<sql id="Field">
 		STOP_ID,
+		NAME,
 		PRICE,	
 		DETAIL,	
 		IMG_PATH,	
@@ -19,7 +20,8 @@
 	<!-- 字段值 -->
 	<sql id="FieldValue">
 		#{STOP_ID},
-		#{PRICE},	
+		#{NAME},
+		#{PRICE},
 		#{DETAIL},	
 		#{IMG_PATH},	
 		#{GOODS_ID}

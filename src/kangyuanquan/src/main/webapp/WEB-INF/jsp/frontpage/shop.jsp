@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <c:forEach items="${shopList}" var="var" varStatus="vs">
                         <div class="shop_box">
                             <img src="${var.LOGO}">
-                            <a href="app_index/goshopping.do?STOPMANAGE_ID=${var.STOPMANAGE_ID}">
+                            <a href="app_index/goshopping.do?STOP_IDsa=${var.STOPMANAGE_ID}">
                                 <div class="live_box_text">
                                     <h2>${var.STOPNAME}</h2>
                                     <p>商品信息：${var.INTRODUCTION}</p>

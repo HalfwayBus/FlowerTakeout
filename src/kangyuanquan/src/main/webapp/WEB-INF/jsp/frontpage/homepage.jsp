@@ -58,10 +58,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <a href="app_index/goshop.do">康园小店<span>&#62;</span></a>
         </div>
         <div class="item">
-            <a href="#">活动分享<span>&#62;</span></a>
+            <a href="app_index/goatlist.do">热门活动<span>&#62;</span></a>
         </div>
         <div class="item">
-            <a href="#">精彩活动<span>&#62;</span></a>
+            <a href="app_userlogin/gosignin.do">登录注册<span>&#62;</span></a>
         </div>
         <div class="item">
             <a href="app_index/goConnectUs">联系我们<span>&#62;</span></a>
@@ -70,13 +70,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </div>
 <div class="content">
         <div class="cont_box">
-            <p><i class="fa fa-shopping-cart"></i>购物</p>
+            <p><i class="fa fa-shopping-cart"></i>高效购物</p>
         </div>
-        <div class="cont_box">
-            <p><i class="fa fa-share-alt-square"></i>分享</p>
+        <div class="cont_box" onclick="not_open();">
+            <p><i class="fa fa-share-alt-square"></i>资源共享</p>
         </div>
-        <div class="cont_box">
-            <p><i class="fa fa-street-view"></i>活动</p>
+        <div class="cont_box" onclick="not_open();">
+            <p><i class="fa fa-street-view"></i>广商论坛</p>
         </div>
         <div class="cont_box" href="app_index/goConnectUs">
             <p><i class="fa fa-send"></i>联系我们</p>
